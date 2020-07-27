@@ -14,12 +14,14 @@ import {
   Param,
   UsePipes,  
   Controller,
-  ValidationPipe
+  ValidationPipe,
+  ParseIntPipe
 } from '@nestjs/common';
 
-import { Task, TaskStatus } from './task.entity';
+import { Task } from './task.entity';
+import { TaskStatus } from './task-status.enum';
 import { TasksService } from './tasks.service';
-import { CreateTaskDTO } from './dto/create-task.dto';
+import { CreateTask } from './dto/create-task.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 
 @ApiTags('Tasks')
@@ -27,37 +29,37 @@ import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 export class TasksController {
   constructor(private tasksService: TasksService) {}
 
-  @Get()
-  @ApiOkResponse({ description: 'Retrieved all tasks' })
-  getAllTasks(): Task[] {
-    return this.tasksService.getAllTasks();
-  }
+  // @Get()
+  // @ApiOkResponse({ description: 'Retrieved all tasks' })
+  // getAllTasks(): Task[] {
+  //   return this.tasksService.getAllTasks();
+  // }
 
-  @Get('/:id')
-  @ApiOkResponse({ description: 'Retrieved a task by id' })
-  getTaskById(@Param('id') id: string): Task {
-    return this.tasksService.getTaskByid(id);
-  }
+  // @Get('/:id')
+  // @ApiOkResponse({ description: 'Retrieved a task by id' })
+  // getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
+  //   return this.tasksService.getTaskByid(id);
+  // }
 
-  @Post()
-  @UsePipes(ValidationPipe)
-  @ApiCreatedResponse({ description: 'Created a task' })
-  @ApiBadRequestResponse({ description: 'Bad Request' })  
-  createTask(@Body() createTaskDTO: CreateTaskDTO): Task {
-    return this.tasksService.createTask(createTaskDTO);
-  }
+  // @Post()
+  // @UsePipes(ValidationPipe)
+  // @ApiCreatedResponse({ description: 'Created a task' })
+  // @ApiBadRequestResponse({ description: 'Bad Request' })  
+  // createTask(@Body() createTaskDTO: CreateTask): Task {
+  //   return this.tasksService.createTask(createTaskDTO);
+  // }
 
-  @Patch('/:id/status')
-  updateTaskStatus(
-    @Param('id') id: string,
-    @Body('status', TaskStatusValidationPipe) status: TaskStatus
-  ): Task {
-    return this.tasksService.updateTaskStatus(id, status);
-  }
+  // @Patch('/:id/status')
+  // updateTaskStatus(
+  //   @Param('id') id: string,
+  //   @Body('status', TaskStatusValidationPipe) status: TaskStatus
+  // ): Task {
+  //   return this.tasksService.updateTaskStatus(id, status);
+  // }
 
-  @Delete('/:id')
-  @ApiOkResponse({ description: 'Deleted a task' })
-  deleteTask(@Param('id') id: string): void {
-    this.tasksService.deleteTask(id);
-  }  
+  // @Delete('/:id')
+  // @ApiOkResponse({ description: 'Deleted a task' })
+  // deleteTask(@Param('id') id: string): void {
+  //   this.tasksService.deleteTask(id);
+  // }
 }

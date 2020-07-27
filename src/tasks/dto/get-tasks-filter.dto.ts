@@ -1,6 +1,6 @@
-import { TaskStatus } from './../task.entity';
+import { TaskStatus } from '../task-status.enum';
 
-export class GetTasksFilterDTO {
+export class GetTasksFilter {
   status: TaskStatus;
   search: string;
 }
