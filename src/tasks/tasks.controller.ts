@@ -35,19 +35,19 @@ export class TasksController {
   //   return this.tasksService.getAllTasks();
   // }
 
-  // @Get('/:id')
-  // @ApiOkResponse({ description: 'Retrieved a task by id' })
-  // getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
-  //   return this.tasksService.getTaskByid(id);
-  // }
+  
+  @ApiOkResponse(@Get('/:id'){ description: 'Retrieved a task by id' })
+  getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
+    return this.tasksService.getTaskByid(id);
+  }
 
-  // @Post()
-  // @UsePipes(ValidationPipe)
-  // @ApiCreatedResponse({ description: 'Created a task' })
-  // @ApiBadRequestResponse({ description: 'Bad Request' })  
-  // createTask(@Body() createTaskDTO: CreateTask): Task {
-  //   return this.tasksService.createTask(createTaskDTO);
-  // }
+  @Post()
+  @UsePipes(ValidationPipe)
+  @ApiCreatedResponse({ description: 'Created a task' })
+  @ApiBadRequestResponse({ description: 'Bad Request' })  
+  createTask(@Body() createTaskDTO: CreateTask): Promise<Task> {
+    return this.tasksService.createTask(createTaskDTO);
+  }
 
   // @Patch('/:id/status')
   // updateTaskStatus(
